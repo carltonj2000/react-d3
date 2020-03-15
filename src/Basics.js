@@ -20,7 +20,6 @@ export default function Basics() {
   return (
     <>
       <svg ref={svgRef}></svg>
-      <hr />
       <button onClick={() => dataSet(data.map(v => v + 5))}>Update Data</button>
       <button onClick={() => dataSet(data.filter(v => v < 35))}>
         Filter Data

@@ -8,14 +8,7 @@ import {
   scaleLinear
 } from "d3";
 
-import "./App.css";
-
-import Basics from "./Basics";
-import LineAxis from "./LineAxis";
-
-const Break = () => <hr style={{ marginTop: "20px" }} />;
-
-function App() {
+export default function LineAxis() {
   const [data, dataSet] = React.useState([25, 30, 45, 50, 20, 65, 75]);
   const svgRef = React.useRef();
 
@@ -35,7 +28,12 @@ function App() {
     svg
       .select(".x-axis")
       .style("transform", "translateY(150px)")
-      .call(xAxis);
+      .call(xAxis)
+      .selectAll("text")
+      .style("text-anchor", "end")
+      .attr("dx", "-1em")
+      .attr("dy", "-.3em")
+      .attr("transform", "rotate(-65)");
 
     const yAxis = axisRight(yScale);
     svg
@@ -68,13 +66,6 @@ function App() {
       <button onClick={() => dataSet(data.filter(v => v < 35))}>
         Filter Data
       </button>
-      <Break />
-      <LineAxis />
-      <Break />
-      <Basics />
-      <Break />
     </>
   );
 }
-
-export default App;
