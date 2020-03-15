@@ -1,17 +1,9 @@
 import React from "react";
 import { select, axisBottom, axisRight, scaleLinear, scaleBand } from "d3";
 
-import "./App.css";
-
-import Basics from "./Basics";
-import LineAxis from "./LineAxis";
-import BarColorAnimation from "./BarColorAnimation";
-
-const Break = () => <hr style={{ marginTop: "20px" }} />;
-
 const initialData = [25, 30, 45, 50, 20, 65, 75];
 
-function App() {
+export default function BarColorAnimation() {
   const [data, dataSet] = React.useState(initialData);
   const svgRef = React.useRef();
 
@@ -68,15 +60,6 @@ function App() {
       <button onClick={() => dataSet(data.map(v => v - 5))}>-</button>
       <button onClick={() => dataSet(data.filter(v => v < 35))}>Filter</button>
       <button onClick={() => dataSet(initialData)}>Reset</button>
-      <Break />
-      <BarColorAnimation />
-      <Break />
-      <LineAxis />
-      <Break />
-      <Basics />
-      <Break />
     </>
   );
 }
-
-export default App;
