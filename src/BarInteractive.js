@@ -3,7 +3,7 @@ import { select, axisBottom, axisRight, scaleLinear, scaleBand } from "d3";
 
 const initialData = [25, 30, 45, 50, 20, 65, 75];
 
-export default function BarColorAnimation() {
+export default function BarInteractive() {
   const [data, dataSet] = React.useState(initialData);
   const svgRef = React.useRef();
 
@@ -44,10 +44,23 @@ export default function BarColorAnimation() {
       .attr("x", (_, i) => xScale(i))
       .attr("y", -150)
       .attr("width", xScale.bandwidth())
+      .on("mouseenter", (v, i) => {
+        svg
+          .selectAll(".tooltip")
+          .data([v])
+          .join(enter => enter.append("text").attr("y", yScale(v) - 4))
+          .text(v)
+          .attr("x", xScale(i) + xScale.bandwidth() / 2)
+          .attr("class", "tooltip")
+          .attr("text-anchor", "middle")
+          .transition()
+          .attr("y", yScale(v) - 8)
+          .attr("opacity", 1);
+      })
+      .on("mouseleave", () => svg.select(".tooltip").remove())
       .transition()
       .attr("fill", colorScale)
       .attr("height", v => v);
-    //.attr("height", v => 150 -yScale(v)); // tutorial used this. I did not.
   }, [data]);
 
   return (
