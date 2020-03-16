@@ -1,8 +1,15 @@
 div {
   text-align: center;
+  padding: 0 50px;
 }
 svg {
   background-color: #eee;
   overflow: visible;
   margin-right: 40px;
+}
+.svg {
+  background-color: #ccc;
+  overflow: visible;
+  display: block;
+  width: 100%;
 }
